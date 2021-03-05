@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Uber Mobility Concepts Team React/Redux Coding Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Run:
+`yarn`
+to install dependencies and get started.
 
-## Available Scripts
+- Guidelines:
 
-In the project directory, you can run:
+  - We have included all needed packages to complete this challenge. If you feel you need another dependency, please email us first before adding a dependency to the package.json. Note: We rarely approve the addition of new packages and encourage the challenge being solved with what is provided.
 
-### `npm start`
+  - Email us as many questions as you want. Questions sent during non working hours may have a slower response time.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  - If you're not familiar with Redux, feel free to use regular React state management or hooks.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Basic Requirements:
 
-### `npm test`
+  - Build `Screens 1 - 4`
+  - Use Redux  to hold TV Show data, API communication status' and authorization status
+    - If you can't set up Redux, move forward with only Component state
+  - Use Component state to hold entered text fields
+  - Use `fetch` for network communications (no axios, no external libraries)
+  - For all screens: The top header should be fixed to the top of the page. The left side content with the button and form entries should be fixed to the left side of the page. Neither the header content or the left side content should scroll if the content inside scrolls.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Not required but nice to have:
+  - Build `Screen Five` to prevent access to screens 1 - 4 until the user is logged in
+  - Some usage of `Flow` if you are familiar with Flow
+  - If you use flow, we prefer you focus your efforts on Reducers/Action Creators
 
-### `npm run build`
+- Submission:
+  - Remove `node_modules`
+  - Zip from this root directory, and find the zip file in the parent directory.
+    ```
+    zip -r ../coding-challege-{your_name}.zip .
+    ```
+  - Upload to `Google Drive` and share the link with us
+    - If you cannot upload to Google drive, copy the src folder, zip it, and email the .zip
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Screen One, Enter Show Name
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The API we will hit when we press `GO` is `tvmaze`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- You can see what the API returns by opening the example request below in a web browser tab
 
-### `npm run eject`
+- Here is a sample `GET` request for the search 'Silicon Valley':
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+https://api.tvmaze.com/singlesearch/shows?q=Silicon%20Valley&embed=episodes
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Screen-One](assets/screens/screenOne.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Screen Two, Searching
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Show this screen after sending the request to the API and while waiting for a response from the API.
 
-## Learn More
+- Create a CSS spinner of your own construction. Use these two color codes `#00C4CC` & `#555753` in your spinner
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Disable the text input and search button while waiting for the API response.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Screen-Two](assets/screens/screenTwo.png)
 
-### Code Splitting
+## Screen Three, Results
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Show Title as the Header
 
-### Analyzing the Bundle Size
+- Show one season of the show at a time, ordered by episode number ascending
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- List seasons below `GO` button, order by season number ascending
 
-### Making a Progressive Web App
+- The currently shown season's text color should be different than the other seasons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- The TV Show content on this screen should scroll
 
-### Advanced Configuration
+- On-click of another season, re-populate the view the correct data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Screen-Three](assets/screens/screenThree.png)
 
-### Deployment
+## Screen Four, No Results
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Show this screen if we get no results from the API
 
-### `npm run build` fails to minify
+![Screen-Four](assets/screens/screenFour.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Screen Five, Login Page
+
+- Show this page first if someone tries to access Screens One, Two, Three, or Four and they are not logged in.
+
+- Hard code a password in Redux of `supersecret`
+
+- When login credentials are satisfied, set a value of `authorized` to `true` in Redux and use this `boolean` to disable unauthorized access on subsequent pages
+
+![Screen-Five](assets/screens/screenFive.png)
